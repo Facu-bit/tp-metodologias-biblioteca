@@ -120,6 +120,16 @@ public class GestorFeria {
         return resultado;
     }
 
+    // TDD - VERDE: implementacion del metodo buscarEmprendedorPorId
+    public Emprendedor buscarEmprendedorPorId(String id) {
+        for (Emprendedor e : emprendedores) {
+            if (e.getId().equals(id)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
     public List<Emprendedor> getEmprendedores() { return emprendedores; }
     public List<Producto> getProductos()         { return productos; }
     public List<Venta> getVentas()               { return ventas; }
