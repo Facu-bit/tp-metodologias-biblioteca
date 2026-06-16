@@ -1,8 +1,13 @@
 package com.feria.modelos;
 
+/**
+ * Clase Venta - representa una venta realizada en la feria.
+ *
+ * SEMANA 1: aca los atributos tambien eran publicos (SMELL 3) y se pasaron a privados.
+ */
 public class Venta {
 
-    // SMELL 3 CORREGIDO: campos publicos reemplazados por privados con getters
+    // SMELL 3 CORREGIDO (Campos publicos): atributos ahora privados con getters/setters.
     private String idVenta;
     private String emprendedorId;
     private String productoNombre;
@@ -18,9 +23,12 @@ public class Venta {
         this.cantidad = cant;
         this.precioUnitario = precioUnit;
         this.fecha = fecha;
-        this.pagoRealizado = false;
+        this.pagoRealizado = false; // al crearse, la venta arranca como NO pagada
     }
 
+    // Calcula el total a cobrar aplicando descuentos:
+    // - 10% si se compran mas de 10 unidades
+    // - 5% adicional si el total supera $5000
     public double calcularTotalConDescuento() {
         double total = cantidad * precioUnitario;
         if (cantidad > 10) total = total * 0.9;
@@ -28,6 +36,7 @@ public class Venta {
         return total;
     }
 
+    // Arma un texto tipo recibo con todos los datos de la venta.
     public String generarRecibo() {
         String recibo = "=== RECIBO DE VENTA ===\n";
         recibo += "Venta ID: " + idVenta + "\n";
@@ -40,7 +49,7 @@ public class Venta {
         return recibo;
     }
 
-    // Getters y setters
+    // GETTERS y SETTERS: acceso controlado a los datos.
     public String getIdVenta()        { return idVenta; }
     public String getEmprendedorId()  { return emprendedorId; }
     public String getProductoNombre() { return productoNombre; }

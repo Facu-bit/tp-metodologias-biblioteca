@@ -1,8 +1,16 @@
 package com.feria.modelos;
 
+/**
+ * Clase Producto - representa un producto que vende un emprendedor.
+ *
+ * SEMANA 1: aca habia dos code smells importantes:
+ * - Campos publicos (SMELL 3)
+ * - Dos metodos identicos hayStockBajo() e isStockBajo() (SMELL 4 - Codigo duplicado)
+ */
 public class Producto {
 
-    // SMELL 3 CORREGIDO: campos publicos reemplazados por privados con getters
+    // SMELL 3 CORREGIDO (Campos publicos): antes todos estos atributos eran "public",
+    // o sea cualquier clase los podia modificar sin control. Ahora son PRIVADOS.
     private String nombre;
     private double precio;
     private int stock;
@@ -17,25 +25,29 @@ public class Producto {
         this.emprendedorId = empId;
     }
 
+    // Calcula el valor total de este producto (precio por cantidad en stock).
     public double valorTotal() {
         return precio * stock;
     }
 
+    // Devuelve un texto con los datos del producto.
     public String mostrar() {
         return nombre + " - $" + precio + " (stock: " + stock + ")";
     }
 
-    // SMELL 4 CORREGIDO: habia dos metodos identicos hayStockBajo() e isStockBajo()
-    // se elimina el duplicado y se deja solo uno con nombre claro
+    // SMELL 4 CORREGIDO (Codigo duplicado): antes existian DOS metodos que hacian
+    // exactamente lo mismo: hayStockBajo() e isStockBajo(). Se elimino el duplicado
+    // y quedo solo este, que devuelve true si el stock es menor a 5.
     public boolean isStockBajo() {
         return stock < 5;
     }
 
+    // Resta una cantidad al stock (se usa cuando se concreta una venta).
     public void reducirStock(int cantidad) {
         this.stock -= cantidad;
     }
 
-    // Getters y setter de stock
+    // GETTERS y SETTER: acceso controlado a los atributos privados.
     public String getNombre()          { return nombre; }
     public double getPrecio()          { return precio; }
     public int getStock()              { return stock; }
